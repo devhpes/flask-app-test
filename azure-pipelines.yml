@@ -6,21 +6,28 @@
 trigger:
 - main
 
-pool:
-  vmImage: ubuntu-latest
+stages:
+- stages: Continous_Integration
+  displayName: Continous Integration
+  pool:
+     vmImage: ubuntu-latest
 
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '3.7'
-  displayName: 'Use Python $(python.version)'
+  jobs:
+    - job: ContinousIntegration
+      displayName: Continous Integration
 
-- script: |
-    python -m pip install --upgrade pip
-    pip install -r requirements.txt
-  displayName: 'Install dependencies'
+      steps:
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '3.7'
+        displayName: 'Use Python $(python.version)'
 
-- task: PythonScript@0
-  inputs:
-    scriptSource: 'filePath'
-    scriptPath: 'hello-world.py'
+      - script: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+        displayName: 'Install dependencies'
+
+      - task: PythonScript@0
+        inputs:
+          scriptSource: 'filePath'
+          scriptPath: 'hello-world.py'
