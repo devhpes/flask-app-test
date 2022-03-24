@@ -7,7 +7,7 @@ trigger:
 - main
 
 stages:
-- stages: Continous_Integration
+- stage: Continous_Integration
   displayName: Continous Integration
   pool:
      vmImage: ubuntu-latest
