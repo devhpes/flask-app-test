@@ -41,7 +41,7 @@ stages:
         inputs:
           SourceFolder: '$(Build.SourcesDirectory)'
           Contents: '**'
-          TargetFolder: '$(Build.ArtifactStagingDirectory)'
+          TargetFolder: '$(Build.StagingDirectory)'
       - task: Docker@2
         displayName: Push to Docker Hub
         inputs:
