@@ -35,6 +35,6 @@ stages:
       - task: Docker@2
         inputs:
           containerRegistry: 'Docker Hub Push'
-          repository: 'flask-app-test'
+          repository: 'abhihpes/flask-app-test'
           command: 'buildAndPush'
           Dockerfile: '**/Dockerfile'
