@@ -28,23 +28,23 @@ stages:
         displayName: 'Install dependencies'
 
       - task: DockerInstaller@0
+        displayName: Install Docker
         inputs:
           dockerVersion: '20.10.13'
           releaseType: stable
+      
       - task: Docker@2
-        displayName: Login to Docker Hub
+        displayName: Docker Login
         inputs:
-          command: 'build'
-          Dockerfile: '**/Dockerfile'
-        
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: '$(Build.SourcesDirectory)'
-          Contents: '**'
-          TargetFolder: '$(Build.StagingDirectory)'
+          containerRegistry: 'Docker Hub Push'
+          command: 'login'
+
       - task: Docker@2
-        displayName: Push to Docker Hub
+        displayName: Build and Push
         inputs:
           containerRegistry: 'Docker Hub Push'
           repository: 'abhihpes/flask-app-test'
-          command: 'push'
+          command: 'buildAndPush'
+          Dockerfile: '**/Dockerfile'
+      
+      
