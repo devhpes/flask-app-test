@@ -27,7 +27,13 @@ stages:
           pip install -r requirements.txt
         displayName: 'Install dependencies'
 
-      - task: PythonScript@0
+      - task: DockerInstaller@0
         inputs:
-          scriptSource: 'filePath'
-          scriptPath: 'hello-world.py'
+          dockerVersion: '20.10.13'
+          releaseType: stable
+      
+      - task: Docker@2
+        inputs:
+          command: 'build'
+          Dockerfile: 'Dockerfile'
+      
