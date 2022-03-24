@@ -31,10 +31,15 @@ stages:
         inputs:
           dockerVersion: '20.10.13'
           releaseType: stable
-      
       - task: Docker@2
+        displayName: Login to Docker Hub
+        inputs:
+          command: 'build'
+          Dockerfile: '**/Dockerfile'
+        
+      - task: Docker@2
+        displayName: Push to Docker Hub
         inputs:
           containerRegistry: 'Docker Hub Push'
           repository: 'abhihpes/flask-app-test'
-          command: 'buildAndPush'
-          Dockerfile: '**/Dockerfile'
+          command: 'push'
